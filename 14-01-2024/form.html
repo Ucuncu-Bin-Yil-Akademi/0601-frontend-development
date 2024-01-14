@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Form & Input Elemanları</h2>
+    <a href="./index.html">Anasayfaya dön</a>
+    <a href="./table.html">Tabloya git</a>
+    <br /><br />
+    <form>
+      <label>Adınız:</label>
+      <input placeholder="Lütfen adınızı giriniz" type="text" />
+
+      <label>Şifreniz:</label>
+      <input placeholder="Şifrenizi giriniz" type="password" />
+
+      <label>Yaşınız:</label>
+      <input type="number" placeholder="Yaşınızı giriniz" />
+
+      <input type="checkbox" />
+      <label>Kullanım koşullarını kabul ediyorum.</label>
+
+      <br /><br />
+
+      <label>Sipariş tarihi:</label>
+      <input type="date" />
+
+      <label>Cinsiyetiniz:</label>
+      <input type="radio" name="gender" /><label>Erkek</label>
+
+      <input type="radio" name="gender" /><label>Kadın</label>
+
+      <br /><br />
+
+      <label>Fotoğraf:</label>
+      <input type="file" />
+
+      <label>Biyografi:</label>
+      <textarea
+        placeholder="Biyografinizi giriniz"
+        cols="50"
+        rows="10"
+      ></textarea>
+
+      <br /><br />
+
+      <label>Şehir:</label>
+      <select>
+        <optgroup label="Marmara Bölgesi">
+          <option>İstanbul</option>
+          <option>Kırklareli</option>
+          <option>Edirne</option>
+        </optgroup>
+        <optgroup label="Karadeniz Bölgesi">
+          <option>Rize</option>
+          <option>Artvin</option>
+          <option>Trabzon</option>
+        </optgroup>
+      </select>
+
+      <br /><br />
+
+      <label>Email:</label>
+      <input type="email" placeholder="Email adresinizi yazınız" />
+
+      <input type="submit" value="Kayıt Ol" />
+    </form>
+  </body>
+</html>
