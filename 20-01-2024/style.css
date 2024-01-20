@@ -1,0 +1,26 @@
+.baslik{
+    color: rgb(255, 255, 255, 0.3);
+    background-color: #282847;
+    border: 5px solid rgb(0, 194, 228);
+}
+
+.kenarlari-yuvarla{
+    border-radius: 10px;
+}
+
+#baska-baslik{
+    color: #8f2626;
+    background-color: #1bf6e0;
+    border-left: 5px solid #252525;
+    border-top: 5px dotted #323232;
+    border-right: 5px solid #3e3e3e;
+    border-bottom: 5px dashed #4a4a4a;
+}
+
+#baska-bir-baslik{
+    color: rgb(103, 187, 75);
+}
+
+i{
+    color: green;
+}
