@@ -1,0 +1,145 @@
+.helloText {
+}
+
+#headingTitle {
+  background-color: #252525;
+}
+
+h1 {
+  color: #b90000;
+}
+
+
+.gorsel1 {
+  /*
+    Görseli yuvarlak yapmak için height ve width property'lerine aynı değerler verilir ve görsel
+    kare hale getirilir. Daha sonrasında border-radius property'sine görsel boyutunun en az
+    yarısı verilir. Yani 200px / 2 = 100px verilir.
+  */
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  border: 1px solid #252525;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 24px;
+  color: rgb(182, 64, 0);
+  border-radius: 5px;
+  text-shadow: 1px 2px 3px rgb(41, 41, 41);
+}
+
+.wrapper {
+  background-color: #c5c5c5;
+  border-radius: 5px;
+
+  /*
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  */
+
+  /*
+  margin: 100px;
+  */
+
+
+
+  /*
+  margin-top: 100px;
+  margin-right: 200px;
+  margin-bottom: 100px;
+  margin-left: 200px;
+  */
+
+  /*
+  margin: 100px 200px;
+  */
+
+
+
+  /*
+  margin-top: 50px;
+  margin-right: 75px;
+  margin-bottom: 100px;
+  margin-left: 150px;
+  */
+
+  margin: 50px 75px 100px 150px;
+ 
+}
+
+.kapsayici{
+   /*  
+   padding-top: 50px;
+    padding-right: 75px;
+    padding-bottom: 100px;
+    padding-left: 150px; 
+    */
+
+    /* 
+    padding: 50px 75px 100px 150px;
+    */
+
+
+    /* 
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px; 
+    */
+
+    padding: 50px;
+
+    border: 1px solid #aaaaaa;
+}
+
+.kapsayici:hover{
+    box-shadow: 2px 3px 5px #949494;
+}
+
+#eleman-2 {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
+
+/*
+#############################
+### SELECTORS - SEÇİCİLER ###
+#############################
+*/
+
+/*
+
+
+*{
+   background-color: rgb(243, 243, 243);
+}
+
+
+*/
+
+.elm3{
+    font-size: 32px !important;
+}
+
+#eleman-3{
+    font-size: 20px;
+}
+
+#ornekEleman{
+    background-color: rgb(120, 255, 138);
+}
+
+#ornekEleman > p{
+    font-size: 48px
+}
+
+#ornekEleman > h2{
+    color: red
+}
+
