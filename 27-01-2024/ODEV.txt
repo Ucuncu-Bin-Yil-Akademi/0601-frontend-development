@@ -1,0 +1,11 @@
+
+1- bir div içerisinde 5 adet type'ı text olan input bulunacak
+
+2- input elemanlarından tek sıra numarasına sahip (1-3-5.)
+input elemanlarının border'ları 2px kalınlığında kırmızı düz
+bir çizgi şeklinde olacak
+
+3- Elemanların arasındaki mesafe 10px olacak
+
+4- type'ı text olan bu elemanların placeholder renkleri ise
+yeşil olacak

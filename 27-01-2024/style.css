@@ -1,0 +1,119 @@
+/*
+Sayfanın arkaplan rengini değiştirmek için aşağıdaki kodu kullanın.
+*/
+
+body {
+  background-color: #dbdbdb;
+}
+
+/* alt attribute'una sahip olan bütün HTML elemanlarını seçer */
+[alt] {
+  border-radius: 10px;
+}
+
+/* alt attribute'unun değeri logo olan bütün HTML elemanlarını seçer */
+[alt="logo"] {
+  border: 3px solid #cf0000;
+}
+
+/* title attribute'unda gitmek kelimesi bulunan bütün HTML elemanlarını seçer */
+[title~="gitmek"] {
+  border: 3px solid #00cf00;
+}
+
+/* href attribute'u https ile başlayan elemanları seçer */
+[href^="https"] {
+  background-color: rgba(223, 130, 0, 0.3);
+  padding: 5px;
+}
+
+/* href attribute'u gov.tr ile biten elemanları seçer */
+[href$="gov.tr"] {
+  background-color: rgba(0, 12, 247, 0.3);
+  padding: 5px;
+}
+
+#paragraf {
+  color: #767676;
+}
+
+/* elemanın başına bir eleman ekler (içerik ekler) */
+#paragraf::before {
+  content: "İçerik: ";
+  font-size: 24px;
+  color: #000;
+}
+
+/* elemanın sonuna bir eleman ekler (nokta ekler) */
+#paragraf::after {
+  content: ".";
+  font-size: 48px;
+  color: #ff7a7a;
+}
+
+/* ilk harfi seçer */
+#paragraf-2::first-letter {
+  color: #949494;
+  font-size: 36px;
+}
+
+input {
+  width: 250px;
+  padding: 10px 3px;
+  border: 2px dotted #1d1d1d;
+  border-radius: 5px;
+}
+
+/* input'a odaklanıldığındaki (tıklandığında) tasarımını değiştirir */
+input:focus {
+  background-color: rgb(227, 227, 227, 0.3);
+  border: 2px dotted rgba(249, 5, 5);
+  outline: none;
+}
+
+input:hover {
+  background-color: rgb(227, 227, 227, 0.5);
+}
+
+/* inputların placeholder tasarımını değiştirir */
+[type="text"]::placeholder {
+  color: #00cf00;
+}
+
+.textWrapper {
+  border: 2px solid #979797;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* textWrapper class'ına sahip elemanın içinde p etiketlerinden ilk p etiketini seçer */
+
+.textWrapper > p:first-child {
+  color: #ff0000;
+}
+
+/* textWrapper class'ına sahip elemanın içinde p etiketlerinden sonuncu p etiketini seçer */
+
+.textWrapper > p:last-child {
+  color: #0000ff;
+}
+
+/* textWrapper class'ına sahip elemanın içinde p etiketlerinden 3. p etiketini seçer */
+.textWrapper > p:nth-child(3) {
+  font-size: 24px;
+}
+
+ul {
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+/* ul elemanının içindeki li elemanlarından tekil sıraya sahip olanları seçer */
+ul > li:nth-child(odd) {
+  background-color: #e65959;
+}
+
+/* ul elemanının içindeki li elemanlarından çift sıraya sahip olanları seçer */
+ol > li:nth-child(even) {
+  background-color: #59e6e6;
+}
