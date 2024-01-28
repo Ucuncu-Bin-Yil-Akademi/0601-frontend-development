@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+}
+
+#wrapper {
+  width: 25%;
+  height: 25vh;
+  background-color: aqua;
+  background-image: url("https://picsum.photos/900/900");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /*
+  background-color: contain;
+  */
+
+  /*
+  background-size: 50% 50%;
+  margin-top: 200px;
+  background-repeat: repeat-y;
+  */
+
+  z-index: 1 !important;
+}
+
+/*
+position property'si elemanın referans noktalarını belirler. relative olarak değer atanırsa, bu elemanın referans noktaları, HTML'in elemanı sayfada konumlandırdığı
+default nokta olacaktır.
+*/
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgb(255, 166, 0);
+  position: relative;
+  left: 10px;
+  top: 20px;
+}
+
+/*
+Eğer position property'sine absolute değeri verilirse, elemanın referans noktası artık sayfanın sınırları olacaktır. 
+Yani sayfanın en üst, en sol, en sağ ve en alt sınırları olur.
+*/
+#paragraph {
+  position: absolute;
+  right: 0px;
+  bottom: 0;
+  font-family: "Roboto Mono", monospace;
+}
+
+#wrapper-2 {
+  width: 25%;
+  height: 25vh;
+  background-color: rgb(28, 172, 185);
+  position: relative; /* (1) */
+}
+
+/*
+absolute değeri verilen elemanın referans noktası sayfanın sınırları olur.
+ancak sayfanın değil, kendisini kapsayan elemanı sınırları referans olsun
+istersek, kendisini kapsayan elemana position: relative değeri atanır. (1)
+*/
+.circle-2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgb(219, 219, 219);
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.top-bar {
+  width: 100%;
+  background-color: rgb(255, 162, 41);
+  position: fixed;
+  top: 0;
+  z-index: -1 !important;
+  float: left;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+  margin-left: 15px;
+  font-size: 24px;
+}
