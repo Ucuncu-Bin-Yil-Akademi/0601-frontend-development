@@ -1,0 +1,29 @@
+body {
+  background-color: #252525;
+  color: rgb(218, 218, 218);
+}
+
+/* 
+flex-direction: column; ile elemanları dikey olarak sıraladık. 
+flex-direction: row; ile elemanları yatay olarak sıralayabiliriz. (default)
+
+justify-content: space-around; ile elemanlar arasında eşit boşluk bırakır ve ilk ve son elemanların kenarlar ile eşit boşluk bırakır.
+justify-content: space-between; ile elemanlar arasında eşit boşluk bırakır ve ilk ve son elemanların kenarlar ile boşluk bırakmaz.
+justify-content: center; ile elemanları ekranın ortasına hizalar.
+justify-content: start; ile elemanları sola hizalar. (default)
+justify-content: end; ile elemanları sağa hizalar.
+
+gap: 50px; ile elemanlar arasında 50px boşluk bırakır.
+
+align-items: center; ile elemanları dikeyde ortalar.
+align-items: start; ile elemanları yukarıda hizalar. (default)
+align-items: end; ile elemanları aşağıda hizalar.
+
+*/
+.flex-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+}

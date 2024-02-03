@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+}
+
+.box {
+  width: 200px;
+  padding: 20px;
+}
+
+/* Ekran genişliği maksimum 600px'e kadar olan cihazlara bir CSS kodu uygular (0-600px)  */
+@media screen and (max-width: 600px) {
+  /* Buradaki CSS komutları ekran genişliği sadece 600px'e kadar olan cihazlara uygulanır!  */
+  .box {
+    background-color: red;
+  }
+}
+
+/* Ekran genişliği minimum 600px ve maksimum 900px olan cihazlara bir CSS kodu uygular (600-900px) */
+/* Yani 600px ile 900px arasındaki ekran genişliğine sahip cihazlara uygulanır */
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .box {
+    background-color: blue;
+  }
+}
+
+/* Ekran genişliği minimum 900px olan cihazlara bir CSS kodu uygular (900px ve üzeri) */
+/* Yani 900px ve üzeri ekran genişliğine sahip cihazlara uygulanır */
+@media screen and (min-width: 900px) {
+  .box {
+    background-color: green;
+  }
+}
+
+/*
+0-600px: Kırmızı
+600-900px: Mavi
+900px ve üzeri: Yeşil
+*/
+
+/* Ekstra küçük cihazlar (Küçük boyutlu telefonlar vb. Örnek: iPhone 4S) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Küçük cihazlar (Büyük boyutlu telefonlar vb. Örnek: iPhone 14 Pro) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Orta ölçekli cihazlar (Tabletler vb.) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Geniş cihazlar (Laptoplar vb.) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Ekstra geniş cihazlar (Masaüstü monitörleri vb.) */
+@media only screen and (min-width: 1200px) {
+}

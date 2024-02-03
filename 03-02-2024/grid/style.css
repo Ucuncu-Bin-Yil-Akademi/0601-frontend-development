@@ -1,0 +1,60 @@
+body {
+  background-color: rgb(229, 229, 229);
+}
+
+.grid-item {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border: 1px solid rgb(0, 0, 0);
+  text-align: center;
+}
+/*
+Bir elemanın ızgara görünümüne sahip olması için display: grid; özelliğini kullanmalıyız.
+grid-template-columns: 200px 100px; ile 200px ve 100px genişliğinde iki sütun oluşturduk.
+Bu property'e kaç adet sütun oluşturmak istiyorsak o kadar değer girmeliyiz.
+
+grid-column-gap: 20px; ile sütunlar arasında 20px boşluk bıraktık.
+grid-row-gap: 20px; ile satırlar arasında 20px boşluk bıraktık.
+
+grid-template-rows ile satırların yükseliğini belirledik.
+
+display: grid ve display:inline-grid arasındaki fark
+display: grid ile tüm sayfa genişliğini kaplar.
+display:inline-grid ile ise sadece içerisindeki elemanlar kadar yer kaplar.
+
+fr birimi ile grid yapısının kapladığı alanı orantılı bir şekilde ayarlayabiliriz.
+Örneğin grid-template-columns: 2fr 3fr; ile 2/5 ve 3/5 oranında iki sütun oluşturduk.
+(2 + 3 = 5) 2fr 3fr toplam 5fr yapar.
+
+grid-template-columns: repeat(3, 3fr); --> 3 adet 3fr genişliğinde sütun oluşturduk.
+gap: 20px; ile sütunlar ve satırlar arasında 20px boşluk bıraktık.
+grid-row-gap: 20px; grid-column-gap: 20px; ile yaptığımız işlemi tek bir satırda yapabiliriz.
+*/
+.grid-container {
+  display: grid;
+  background-color: rgb(251, 89, 89);
+  grid-template-columns: 2fr 3fr;
+  grid-column-gap: 20px;
+
+  grid-template-rows: 50px 100px 150px;
+  grid-row-gap: 20px;
+}
+
+/*
+Bir elemanın spesifik olarak hangi sütun ve satırlar arasında yer alacağını belirlemek için
+grid-column-start, grid-column-end, grid-row-start, grid-row-end property'lerini kullanabiliriz.
+http://grid-layout.com/grid-lines.html adresinden ızgara yapısını inceleyebilirsiniz.
+Row lines ve column lines numaraları ile hangi sütun ve satırlar arasında yer alacağını belirleyebiliriz.
+*/
+.item-3 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+/*
+column: sütun
+row: satır
+*/
