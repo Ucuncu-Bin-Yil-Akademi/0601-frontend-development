@@ -25,6 +25,7 @@ console.log("Dakika:", minuteInfo);
 switch (dayInfo) {
   case 0:
     day = "Pazar";
+    break;
   case 1:
     day = "Pazartesi";
     break;

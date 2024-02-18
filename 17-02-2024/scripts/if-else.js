@@ -32,8 +32,6 @@ else console.log("Hiçbirisi doğru değil");
 
 if (3 > 5) {
   console.log("3 sayısı 5'ten büyüktür");
-} else {
-  console.log("3 sayısı 5'ten küçüktür");
 }
 
 3 > 5
@@ -42,4 +40,4 @@ if (3 > 5) {
 
 // CLEAN CODE (3) # IF-ELSE
 
-(5 > 3) && console.log("Şart sağlandı. 3 sayısı 5'ten büyüktür.");
+5 > 3 && console.log("Şart sağlandı. 3 sayısı 5'ten büyüktür.");
