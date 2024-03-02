@@ -5,7 +5,7 @@ for (let i = 0; i < 10; i++) {
   console.log("Döngü çalıştı:", i);
 
   if (i === 3) {
-    break; // break ile döngüyü durdurabilir ve döngüden çıkabiliriz. (Sonlandırır)
+    break; // break ile döngüyü durdurabilir ve döngüden çıkabiliriz (Sonlandırır)
   }
 }
 
