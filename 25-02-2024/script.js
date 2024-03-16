@@ -24,8 +24,8 @@ console.log(arrayVar.length);
 // Array'lerde index numarası 0'dan başlar.
 console.log(arrayVar[0]);
 
-console.log(arrayVar[6]);
-console.log(arrayVar[6][1]);
+console.log(arrayVar[8]);
+console.log(arrayVar[8][1]);
 
 const firstName = "Canberk"; // ['C', 'a', 'n', 'b', 'e', 'r', 'k']
 console.log(firstName[2]);
@@ -44,6 +44,7 @@ console.log("Javascript string elemanının index değeri: ", indexOfElement);
 const indexOfElement2 = arrayVar.indexOf(true);
 console.log("true boolean elemanının index değeri: ", indexOfElement2);
 
+// Array'de olmayan bir elemanın index numarası bulunmak istenirse indexOf metodu -1 değerini döner.
 const indexOfElement3 = arrayVar.indexOf("arrayde olmayan bir eleman");
 console.log("arrayde olmayan bir elemanın index değeri: ", indexOfElement3);
 
@@ -74,11 +75,13 @@ console.log("Reversed array: ", reversedArray);
 
 const newArray = ["Hello", "World", "Javascript"];
 const stringedArray = newArray.join();
+// "Hello,World,Javascript"
 
 console.log("Stringed array: ", stringedArray);
 
 const stringedArray2 = newArray.join(" * ");
 console.log("Stringed array with separator: ", stringedArray2);
+// "Hello * World * Javascript"
 
 // # Split # (6)
 // String'i array'e çevirir.
@@ -86,6 +89,7 @@ console.log("Stringed array with separator: ", stringedArray2);
 const stringVar = "Üçüncü Bin Yıl Akademi";
 const arrayVar2 = stringVar.split(" ");
 console.log("String to array: ", arrayVar2);
+//  ["Üçüncü", "Bin", "Yıl", "Akademi"]
 
 // # Concat # (7)
 
