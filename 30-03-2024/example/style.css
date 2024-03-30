@@ -1,0 +1,63 @@
+.newTodoWrapper{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.containerTodo{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.newTodoWrapper > input{
+    border: 3px solid rgb(194, 194, 194);
+    border-right: none;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.newTodoWrapper > button{
+    background-color: rgb(66, 167, 255);
+    padding: 10px 40px;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.todoList{
+    background-color: rgb(233, 233, 233);
+    width: 50%;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    & > h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+}
+
+.task{
+    background-color: rgb(211, 211, 211);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+i{
+    color:red
+}
