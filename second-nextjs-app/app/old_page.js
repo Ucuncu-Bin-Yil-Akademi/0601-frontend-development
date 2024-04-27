@@ -14,8 +14,9 @@ export default function Home() {
     setLorem2Text("Yeni değer");
   };
 
-  /*   useEffect(() => {
-    alert("Burası sadece sayfa ilk yüklendiği anda çalışır.");
+  /*
+  useEffect(() => {
+    console.log("Burası sayfa ilk yüklendiği anda çalışır.");
   }, []); */
 
   useEffect(() => {
