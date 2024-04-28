@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import CounterContext from "@/app/context/counterContext";
+import ReduxProvider from "./redux/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,9 +13,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <CounterContext>
-        <body className={inter.className}>{children}</body>
-      </CounterContext>
+      <ReduxProvider>
+        <CounterContext>
+          <body className={inter.className}>{children}</body>
+        </CounterContext>
+      </ReduxProvider>
     </html>
   );
 }

@@ -6,7 +6,7 @@ import { CounterData } from "./context/counterContext";
 export default function Home() {
   const { setCounter } = useContext(CounterData);
   return (
-    <div className="w-screen h-screen bg-gray-900 flex flex-col justify-center items-center gap-10">
+    <div className="w-screen h-screen flex flex-col justify-center items-center gap-10">
       <h2>Hello world!</h2>
       <Counter />
       <button
