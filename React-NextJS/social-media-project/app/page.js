@@ -1,9 +1,11 @@
-import Image from "next/image";
+import PublishSection from "./components/Main/PublishSection";
+import ContentList from "./components/Main/ContentList";
 
 export default function Home() {
   return (
-    <>
-      <h1>Home Page</h1>
-    </>
+    <div className="bg-white border shadow rounded min-h-screen">
+      <PublishSection />
+      <ContentList />
+    </div>
   );
 }
