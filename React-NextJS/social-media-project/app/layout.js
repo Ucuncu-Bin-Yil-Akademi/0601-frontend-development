@@ -5,6 +5,8 @@ import { Header, Sidebar } from "./components";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +26,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ToastContainer />
+
         {isLoading ? (
           <div className="w-screen h-screen flex justify-center items-center">
             <div className="flex flex-col items-center gap-5">
