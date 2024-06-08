@@ -1,7 +1,7 @@
-import ContentCard from "../../Cards/ContentCard";
+import ContentCard from "@/app/components/Cards/ContentCard";
 import Masonry from "@mui/lab/Masonry";
 
-export default function ContentList() {
+export default function ProfileContents() {
   const contentData = [
     {
       id: 1,
@@ -92,18 +92,19 @@ export default function ContentList() {
       likeCount: 11,
     },
   ];
+
   return (
-    <div className="p-3">
-      <Masonry columns={3} spacing={2}>
+    <div className="">
+      <Masonry columns={4} spacing={2}>
         {contentData.map((content) => {
           return (
             <ContentCard
               key={content.id}
               content={content.content}
-              image={content.image}
               user={content.user}
               date={content.date}
               likeCount={content.likeCount}
+              image={content.image}
             />
           );
         })}

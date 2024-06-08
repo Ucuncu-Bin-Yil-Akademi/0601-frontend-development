@@ -13,6 +13,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
   return (
@@ -128,7 +129,9 @@ export default function Header() {
 
   return (
     <div className="bg-white p-5 border-b shadow-sm flex items-center justify-between">
-      <Image src={Logo} alt="Logo" width={100} height={100} />
+      <Link href="/">
+        <Image src={Logo} alt="Logo" width={100} height={100} />
+      </Link>
 
       <input
         type="search"
