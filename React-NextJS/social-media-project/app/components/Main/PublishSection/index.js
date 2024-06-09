@@ -5,7 +5,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import { youtubeParser } from "@/app/utils/youtubeParser";
+import { youtubeParser } from "../../../utils/youtubeParser";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function PublishSection() {
   const [content, setContent] = useState("");
@@ -15,6 +18,39 @@ export default function PublishSection() {
     isModalVisible: false,
     url: "",
   });
+
+  const handlePublishContent = async () => {
+    try {
+      const requestFormData = new FormData();
+      requestFormData.append("content", content);
+      requestFormData.append("embedVideo", youtubeVideoUrl?.url);
+      //requestFormData.append("image", selectedImage);
+      // artan maliyet sebebiyle görsel yüklemeyi kaldırdım.
+
+      const response = await axios.post(
+        "http://localhost:3001/publications/publish",
+        requestFormData,
+        {
+          ContentType: "multipart/form-data",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("İçerik başarıyla paylaşıldı.");
+      } else {
+        toast.error(
+          "İçerik paylaşılırken bir hata oluştu. Lütfen tekrar deneyin."
+        );
+      }
+    } catch (e) {
+      toast.error(
+        "İçerik paylaşılırken bir hata oluştu. Lütfen tekrar deneyin."
+      );
+    }
+  };
   return (
     <>
       <div className="bg-gray-100 p-5 border-b ">
@@ -97,7 +133,10 @@ export default function PublishSection() {
             )}
           </div>
 
-          <button className="bg-primary py-1 px-2 rounded text-light text-md">
+          <button
+            className="bg-primary py-1 px-2 rounded text-light text-md"
+            onClick={handlePublishContent}
+          >
             Paylaş
           </button>
         </div>

@@ -1,4 +1,4 @@
-import ContentCard from "@/app/components/Cards/ContentCard";
+import ContentCard from "../../../../components/Cards/ContentCard";
 import Masonry from "@mui/lab/Masonry";
 
 export default function ProfileContents() {

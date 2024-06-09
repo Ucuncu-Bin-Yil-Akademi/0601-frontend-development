@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,14 +16,26 @@ export default function RootLayout({ children }) {
   const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
+    const userToken = Cookies.get("token");
     if (pathname === "/login" || pathname === "/register") {
+      if (userToken) {
+        router.push("/");
+        return;
+      }
       setIsLayoutActive(false);
-    } else setIsLayoutActive(true);
+    } else {
+      if (!userToken) {
+        router.push("/login");
+        return;
+      }
+      setIsLayoutActive(true);
+    }
 
     setIsLoading(false);
-  }, [pathname]);
+  }, [pathname, router]);
 
   return (
     <html lang="en">

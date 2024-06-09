@@ -1,5 +1,5 @@
 "use client";
-import Logo from "@/public/logo.png";
+import Logo from "../../../public/logo.png";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";

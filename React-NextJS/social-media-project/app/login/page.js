@@ -1,6 +1,32 @@
+"use client";
+import Cookies from "js-cookie";
+import axios from "axios";
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", {
+        email: email,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        toast.success("Giriş başarılı. Yönlendiriliyorsunuz.");
+        Cookies.set("token", response.data.token);
+        router.push("/");
+      }
+    } catch (e) {
+      toast.error("Giriş yapılırken bir hata oluştu. Lütfen tekrar deneyin.");
+    }
+  };
   return (
     <>
       <div className="h-screen w-screen flex justify-center items-center">
@@ -17,13 +43,20 @@ export default function LoginPage() {
               className="border px-3 py-2 rounded"
               type="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               className="border px-3 py-2 rounded"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="bg-secondary text-light p-3 rounded">
+            <button
+              className="bg-secondary text-light p-3 rounded"
+              onClick={handleLogin}
+            >
               Sign In
             </button>
             <div className="flex justify-end my-3">
