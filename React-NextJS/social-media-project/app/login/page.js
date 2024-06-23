@@ -21,6 +21,17 @@ export default function LoginPage() {
       if (response.status === 200) {
         toast.success("Giriş başarılı. Yönlendiriliyorsunuz.");
         Cookies.set("token", response.data.token);
+        localStorage.setItem("userId", JSON.stringify(response.data._id));
+        localStorage.setItem("name", JSON.stringify(response.data.name));
+        localStorage.setItem("bio", JSON.stringify(response.data.bio));
+        localStorage.setItem(
+          "username",
+          JSON.stringify(response.data.username)
+        );
+        localStorage.setItem(
+          "lastname",
+          JSON.stringify(response.data.lastname)
+        );
         router.push("/");
       }
     } catch (e) {

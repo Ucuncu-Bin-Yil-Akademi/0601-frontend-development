@@ -9,11 +9,15 @@ import { youtubeParser } from "../../../utils/youtubeParser";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { contentAtom } from "../../../context/contentAtom";
+import { useAtom } from "jotai";
 
 export default function PublishSection() {
   const [content, setContent] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [videoUrl, setVideoUrl] = useState("");
+  const [, setContentData] = useAtom(contentAtom);
+
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState({
     isModalVisible: false,
     url: "",
@@ -40,6 +44,19 @@ export default function PublishSection() {
 
       if (response.status === 200) {
         toast.success("İçerik başarıyla paylaşıldı.");
+
+        axios
+          .get("http://localhost:3001/publications", {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          })
+          .then((response) => {
+            setContentData(response.data.publications);
+          })
+          .catch((error) => {
+            toast.error("İçerikler getirilirken bir hata oluştu.");
+          });
       } else {
         toast.error(
           "İçerik paylaşılırken bir hata oluştu. Lütfen tekrar deneyin."

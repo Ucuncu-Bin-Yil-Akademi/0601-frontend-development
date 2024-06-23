@@ -38,7 +38,7 @@ function a11yProps(index) {
   };
 }
 
-export default function ProfileTabs() {
+export default function ProfileTabs({ userData }) {
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleChange = (event, newValue) => {

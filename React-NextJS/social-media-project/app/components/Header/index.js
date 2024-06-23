@@ -6,14 +6,17 @@ import IconButton from "@mui/material/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { useAtom } from "jotai";
+import { contentAtom } from "../../context/contentAtom";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
   return (
@@ -22,7 +25,7 @@ const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
         <div className="flex gap-3">
           <input
             type="text"
-            placeholder="Ad"
+            placeholder={localStorage.getItem("name")?.replaceAll('"', "")}
             value={profileSetting.name}
             onChange={(e) => {
               setProfileSetting({
@@ -34,12 +37,12 @@ const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
           />
           <input
             type="text"
-            placeholder="Soyad"
-            value={profileSetting.surname}
+            placeholder={localStorage.getItem("lastname")?.replaceAll('"', "")}
+            value={profileSetting.lastname}
             onChange={(e) => {
               setProfileSetting({
                 ...profileSetting,
-                surname: e.target.value,
+                lastname: e.target.value,
               });
             }}
             className="border px-3 py-2 rounded"
@@ -48,11 +51,11 @@ const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
         <input
           type="password"
           placeholder="Güncel Şifre"
-          value={profileSetting.password}
+          value={profileSetting.currentPassword}
           onChange={(e) => {
             setProfileSetting({
               ...profileSetting,
-              password: e.target.value,
+              currentPassword: e.target.value,
             });
           }}
           className="border px-3 py-2 rounded w-full"
@@ -61,11 +64,11 @@ const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
           <input
             type="password"
             placeholder="Yeni Şifre"
-            value={profileSetting.newPassword}
+            value={profileSetting.password}
             onChange={(e) => {
               setProfileSetting({
                 ...profileSetting,
-                newPassword: e.target.value,
+                password: e.target.value,
               });
             }}
             className="border px-3 py-2 rounded"
@@ -84,7 +87,10 @@ const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
           />
         </div>
         <textarea
-          placeholder="Biyografi"
+          placeholder={
+            localStorage.getItem("bio")?.replaceAll('"', "") ||
+            "Biyografi bilginiz bulunmamaktadır."
+          }
           className="border px-3 py-2 rounded w-full resize-none"
           value={profileSetting.bio}
           onChange={(e) => {
@@ -102,11 +108,13 @@ const ProfileUpdateSection = ({ profileSetting, setProfileSetting }) => {
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [contentData, setContentData] = useAtom(contentAtom);
   const [profileSetting, setProfileSetting] = useState({
     name: "",
-    surname: "",
+    lastname: "",
+    currentPassword: "",
     password: "",
-    newPassword: "",
     newPasswordRepeat: "",
     bio: "",
   });
@@ -119,13 +127,61 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    Cookies.remove("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("name");
+    localStorage.removeItem("lastname");
+    localStorage.removeItem("bio");
+    localStorage.removeItem("username");
+    window.location.href = "/login";
+  };
+
   const handleUpdateProfileSettings = async () => {
-    if (profileSetting.newPassword !== profileSetting.newPasswordRepeat) {
+    if (profileSetting.password !== profileSetting.newPasswordRepeat) {
       toast.error("Şifreler uyuşmuyor.");
       return;
     }
+
+    try {
+      axios
+        .put("http://localhost:3001/users", profileSetting, {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        })
+        .then((response) => {
+          toast.success("Profil ayarlarınız başarıyla güncellendi.");
+          handleLogout();
+        })
+        .catch((error) => {
+          toast.error("Profil ayarlarınız güncellenirken bir hata oluştu.");
+        });
+    } catch (error) {
+      toast.error("Profil ayarlarınız güncellenirken bir hata oluştu.");
+    }
+
     setIsSettingsModalOpen(false);
   };
+
+  useEffect(() => {
+    try {
+      axios
+        .get(`http://localhost:3001/publications?search=${search}&limit=50`, {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        })
+        .then((response) => {
+          setContentData(response.data.publications);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [search, setContentData]);
 
   return (
     <div className="bg-white p-5 border-b shadow-sm flex items-center justify-between">
@@ -137,11 +193,18 @@ export default function Header() {
         type="search"
         placeholder="Search"
         className="border px-3 py-2 rounded w-1/2"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
 
       <div className="flex items-center gap-3">
         <span className="text-gray-600">
-          Hello, <strong>John Doe</strong>
+          Hello,{" "}
+          <strong>
+            {localStorage.getItem("name")?.replaceAll('"', "") +
+              " " +
+              localStorage.getItem("lastname")?.replaceAll('"', "")}
+          </strong>
         </span>
 
         <IconButton
@@ -163,7 +226,15 @@ export default function Header() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Profil</MenuItem>
+          <MenuItem
+            onClick={() => {
+              window.location.href = localStorage
+                .getItem("username")
+                .replaceAll('"', "");
+            }}
+          >
+            Profil
+          </MenuItem>
           <MenuItem
             onClick={() => {
               setIsSettingsModalOpen(true);
@@ -172,7 +243,7 @@ export default function Header() {
           >
             Hesap Ayarları
           </MenuItem>
-          <MenuItem onClick={handleClose}>Çıkış Yap</MenuItem>
+          <MenuItem onClick={handleLogout}>Çıkış Yap</MenuItem>
         </Menu>
       </div>
 

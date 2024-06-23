@@ -1,10 +1,74 @@
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Image from "next/image";
 import moment from "moment";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { contentAtom } from "../../../context/contentAtom";
+import { useAtom } from "jotai";
+import { useState, useEffect } from "react";
 
-export default function ContentCard({ user, date, content, image, likeCount }) {
+export default function ContentCard({
+  user,
+  date,
+  content,
+  image,
+  likeCount,
+  likes,
+  contentId,
+}) {
+  const [, setContentData] = useAtom(contentAtom);
+  const [currentUserId, setCurrentUserId] = useState(
+    localStorage.getItem("userId")
+  );
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    console.log(userId);
+    setCurrentUserId(userId);
+  }, []);
+
+  const handleLike = async () => {
+    try {
+      axios
+        .post(
+          `http://localhost:3001/publications/action/${contentId}`,
+          {
+            action: "like",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
+        )
+        .then((response) => {
+          try {
+            axios
+              .get("http://localhost:3001/publications", {
+                headers: {
+                  Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+              })
+              .then((response) => {
+                setContentData(response.data.publications);
+              })
+              .catch((error) => {
+                toast.error("İçerikler getirilirken bir hata oluştu.");
+              });
+          } catch (error) {
+            toast.error("İçerikler getirilirken bir hata oluştu.");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="border rounded">
@@ -35,8 +99,12 @@ export default function ContentCard({ user, date, content, image, likeCount }) {
           )} */}
         </div>
         <div className="flex items-center bg-gray-100">
-          <IconButton aria-label="delete">
-            <FavoriteBorderIcon />
+          <IconButton onClick={handleLike}>
+            {likes?.includes(currentUserId?.replaceAll('"', "")) ? (
+              <FavoriteIcon color="error" />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
           </IconButton>
           <span className="text-sm">{likeCount} kullanıcı</span>
         </div>
