@@ -38,7 +38,11 @@ function a11yProps(index) {
   };
 }
 
-export default function ProfileTabs({ userData }) {
+export default function ProfileTabs({
+  userData,
+  setUserData,
+  currentUsername,
+}) {
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -60,13 +64,35 @@ export default function ProfileTabs({ userData }) {
           </Tabs>
         </div>
         <CustomTabPanel currentTab={currentTab} index={0}>
-          <ProfileContents />
+          {userData?.publications?.length > 0 ? (
+            <ProfileContents
+              userData={userData}
+              setUserData={setUserData}
+              currentUsername={currentUsername}
+            />
+          ) : (
+            <div className="text-center text-gray-400">
+              Bu kullanıcı içerik paylaşmamış.
+            </div>
+          )}
         </CustomTabPanel>
         <CustomTabPanel currentTab={currentTab} index={1}>
-          <ProfileFollowers />
+          {userData?.userFollowers?.length > 0 ? (
+            <ProfileFollowers userData={userData} />
+          ) : (
+            <div className="text-center text-gray-400">
+              Bu kullanıcının takipçisi bulunmamaktadır.
+            </div>
+          )}
         </CustomTabPanel>
         <CustomTabPanel currentTab={currentTab} index={2}>
-          <ProfileFollowings />
+          {userData?.following?.length > 0 ? (
+            <ProfileFollowings userData={userData} />
+          ) : (
+            <div className="text-center text-gray-400">
+              Bu kullanıcı kimseyi takip etmiyor.
+            </div>
+          )}
         </CustomTabPanel>
       </div>
     </div>

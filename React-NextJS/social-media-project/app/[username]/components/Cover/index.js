@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
 import styles from "./Cover.module.css";
 import Avatar from "@mui/material/Avatar";
 
-export default function ProfileCover({ userData }) {
+export default function ProfileCover({ userData, handleFollowUser }) {
+  const [currentUserId, setCurrentUserId] = useState("");
+
+  useEffect(() => {
+    const userIdVal = window.localStorage.getItem("userId");
+    setCurrentUserId(userIdVal?.replaceAll('"', ""));
+  }, []);
+
   return (
     <div className={styles.coverWrapper}>
       <div className="flex justify-between items-center gap-5">
@@ -30,9 +38,27 @@ export default function ProfileCover({ userData }) {
             </p>
           </div>
         </div>
-        <div className="w-1/4 flex justify-end">
-          <button className="bg-primary px-5 py-3 rounded">Takip Et</button>
-        </div>
+        {currentUserId !== userData._id && (
+          <div className="w-1/4 flex justify-end">
+            {userData?.userFollowers?.filter(
+              (user) => user._id === currentUserId
+            ).length > 0 ? (
+              <button
+                className="bg-primary px-5 py-3 rounded"
+                onClick={handleFollowUser}
+              >
+                Takipten Çık
+              </button>
+            ) : (
+              <button
+                className="bg-primary px-5 py-3 rounded"
+                onClick={handleFollowUser}
+              >
+                Takip Et
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

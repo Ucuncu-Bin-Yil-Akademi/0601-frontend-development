@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Image from "next/image";
 import moment from "moment";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -18,6 +17,8 @@ export default function ContentCard({
   likeCount,
   likes,
   contentId,
+  setUserData,
+  currentUsername,
 }) {
   const [, setContentData] = useAtom(contentAtom);
   const [currentUserId, setCurrentUserId] = useState(
@@ -45,6 +46,19 @@ export default function ContentCard({
           }
         )
         .then((response) => {
+          if (setUserData && currentUsername) {
+            axios
+              .get(`http://localhost:3001/users/${currentUsername}`, {
+                headers: {
+                  Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+              })
+              .then((res) => {
+                setUserData(res.data);
+              });
+            return;
+          }
+
           try {
             axios
               .get("http://localhost:3001/publications", {

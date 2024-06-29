@@ -48,6 +48,7 @@ export default function ContentList() {
           setContentData([...contentData, ...response.data.publications]);
           setCurrentPage(currentPage + 1);
           setTotalPageCount(response.data.totalPages);
+
           if (currentPage + 1 === totalPageCount) {
             setHasMore(false);
           }
