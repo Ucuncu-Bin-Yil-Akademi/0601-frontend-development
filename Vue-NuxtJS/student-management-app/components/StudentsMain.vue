@@ -1,0 +1,3 @@
+<template>
+  <h2>Students</h2>
+</template>
