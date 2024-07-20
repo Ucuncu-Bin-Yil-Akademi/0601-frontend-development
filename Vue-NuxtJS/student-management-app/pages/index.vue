@@ -68,6 +68,7 @@ const handleLogin = async () => {
       text.value = "Giriş Başarılı";
       snackbar.value = true;
       Cookies.set("role", response.data.data.role);
+      window.location.href = "/dashboard";
     }
   } catch (error) {
     text.value = "Giriş Başarısız";

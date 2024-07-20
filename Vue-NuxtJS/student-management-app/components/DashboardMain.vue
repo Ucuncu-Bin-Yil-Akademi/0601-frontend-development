@@ -74,8 +74,11 @@ onMounted(async () => {
       <div>
         <h2 class="my-5 text-2xl">Son Açılan Sınıflar</h2>
 
-        <div class="flex gap-5" v-for="(course, index) in courses">
-          <div class="flex gap-5">
+        <div class="flex gap-5">
+          <div
+            class="flex gap-5"
+            v-for="(course, index) in courses.slice(0, 6)"
+          >
             <div class="flex flex-col p-5 border bg-gray-100 rounded">
               <span class="text-xl">{{ course.courseName }} </span>
               <span

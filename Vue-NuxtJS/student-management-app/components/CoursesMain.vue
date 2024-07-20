@@ -96,9 +96,79 @@
             Eğitimi Sil
           </v-btn>
 
-          <v-btn color="primary" @click="handleUpdateCourse(course)">
-            Eğitimi Güncelle
-          </v-btn>
+          <v-dialog max-width="500">
+            <template v-slot:activator="{ props: activatorProps }">
+              <v-btn
+                v-bind="activatorProps"
+                color="surface-variant"
+                text="Eğitimi Güncelle"
+                @click="newCourse = { ...course }"
+                variant="flat"
+              ></v-btn>
+            </template>
+
+            <template v-slot:default="{ isActive }">
+              <v-card title="Eğitimi Güncelle">
+                <div class="p-5">
+                  <v-text-field
+                    label="Eğitim Adı"
+                    v-model="newCourse.courseName"
+                    variant="solo"
+                  ></v-text-field>
+
+                  <v-date-input
+                    label="Başlangıç Tarihi"
+                    prepend-icon=""
+                    v-model="newCourse.startDate"
+                    variant="solo"
+                  ></v-date-input>
+
+                  <v-date-input
+                    label="Bitiş Tarihi"
+                    prepend-icon=""
+                    v-model="newCourse.endDate"
+                    variant="solo"
+                  ></v-date-input>
+
+                  <v-text-field
+                    label="Eğitim Süresi (saat)"
+                    variant="solo"
+                    v-model="newCourse.totalHours"
+                  ></v-text-field>
+
+                  <v-select
+                    label="Öğrenci Seçiniz"
+                    :items="students"
+                    :item-title="(item) => `${item.name} ${item.lastName}`"
+                    item-value="_id"
+                    variant="solo"
+                    multiple
+                    v-model="newCourse.students"
+                  ></v-select>
+
+                  <v-select
+                    label="Eğitmen Seçiniz"
+                    :items="instructors"
+                    :item-title="(item) => `${item.name} ${item.lastName}`"
+                    item-value="_id"
+                    v-model="newCourse.instructor"
+                    variant="solo"
+                  ></v-select>
+                </div>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                    color="primary"
+                    @click="handleUpdateCourse(newCourse._id)"
+                  >
+                    Eğitimi Güncelle
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
+          </v-dialog>
         </div>
       </div>
     </div>
@@ -119,6 +189,8 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import moment from "moment";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const courses = ref([]);
 const students = ref([]);
@@ -126,6 +198,53 @@ const instructors = ref([]);
 
 const snackbar = ref(false);
 const text = ref("");
+
+const handleUpdateCourse = async (courseId) => {
+  try {
+    const UpdateResponse = await axios.put(
+      `http://localhost:3001/classes/${courseId}/update`,
+      {
+        ...newCourse.value,
+      }
+    );
+
+    if (UpdateResponse?.status === 200) {
+      snackbar.value = true;
+      text.value = "Eğitim başarıyla güncellendi";
+      await handleGetCourses();
+    }
+  } catch (err) {}
+};
+
+const handleDeleteCourse = async (courseId) => {
+  try {
+    Swal.fire({
+      title: "Eğitimi silmek istediğinize emin misiniz?",
+      showDenyButton: true,
+      confirmButtonText: `Sil`,
+      denyButtonText: `Vazgeç`,
+    }).then(async (response) => {
+      if (response?.isConfirmed) {
+        const DeleteResponse = await axios.delete(
+          `http://localhost:3001/classes/${courseId}/delete`
+        );
+
+        if (DeleteResponse.status === 200) {
+          snackbar.value = true;
+          text.value = "Eğitim başarıyla silindi";
+
+          await handleGetCourses();
+        } else {
+          snackbar.value = true;
+          text.value = "Eğitim silinirken bir hata oluştu";
+        }
+      }
+    });
+  } catch (err) {
+    snackbar.value = true;
+    text.value = "Eğitim silinirken bir hata oluştu";
+  }
+};
 
 const newCourse = ref({
   courseName: "",
